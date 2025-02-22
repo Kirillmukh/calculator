@@ -136,4 +136,18 @@ button.equals_btn:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.history_entity {
+    background-color: #FFFAEB;
+    margin-bottom: 16px;
+    height: 75px;
+    border-radius: 42px;
+    font-size: 55px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

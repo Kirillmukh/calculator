@@ -4,6 +4,8 @@ require(["jquery"], function ($) {
 
   let result = [];
   let lastOperandIndex = 0;
+  const localHistoryRanges = [[585, 600], [630, 663]];
+  let localRange = 0;
 
   function reset(num) {
     result = [];
@@ -23,6 +25,7 @@ require(["jquery"], function ($) {
   }
 
   function compute() {
+    const source = result.slice(0, result.length - 1);
     try {
       function apply_operand(operand) {
         if (operand === "+") {
@@ -48,8 +51,7 @@ require(["jquery"], function ($) {
           const operand = operands.pop();
           const operand_func = apply_operand(operand);
           digits.push(operand_func.call(this, prev, curr));
-        } else if (OPERANDS.has(char))
-        {
+        } else if (OPERANDS.has(char)) {
           isLastDigit = false;
           operands.push(char);
         } else {
@@ -64,6 +66,15 @@ require(["jquery"], function ($) {
         console.log(operands);
       }
 
+      while (operands.length > 0) {
+        const curr = digits.pop();
+        const prev = digits.pop();
+        const operand = operands.pop();
+        const operand_func = apply_operand(operand);
+        digits.push(operand_func.call(this, prev, curr));
+      }
+
+      addToLocalHistory(source, +digits[0]);
       reset(+digits[0]);
     } catch (e) {
       console.error("Threw exception: " + e);
@@ -121,10 +132,13 @@ require(["jquery"], function ($) {
       onClick("(", true);
     });
     $("#parentheses_close").click(function () {
+      if (count(result, "(") <= count(result, ")"))
+        result.unshift("(");
       onClick(")");
     });
 
     $("#equals_btn").click(() => {
+
       result.push(")");
       compute();
     });
@@ -148,4 +162,35 @@ require(["jquery"], function ($) {
     setOnClickNumbers();
     setOnClickOperators();
   });
+
+  function randInt(min, max) {
+    const res = Math.floor(Math.random() * (max - min)) + min;
+    console.log(res);
+    return res;
+  }
+
+  function count(list, char) {
+    return list.filter(ch => ch === char).length;
+  }
+
+  function addToLocalHistory(source, answer) {
+
+    const width = randInt(...localHistoryRanges[localRange]);
+    localRange = +(!localRange);
+    const button = $(`<button class="history_entity">${source.join("")} = ${answer}</button>`);
+
+    button.css(
+      {
+        "min-width": width,
+        "max-width": width,
+        width: `${width}px !important`,
+      })
+
+    button.click(function () {
+      result = source;
+      showResults(result.join(""));
+    })
+
+    $(".history_entity_container").append(button);
+  }
 });
