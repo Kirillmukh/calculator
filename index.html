@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Awesome calculator</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300;400;700&display=swap"
+          rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="header_container">
+    <p class="header_title">AWESOME C4LK</p>
+</div>
+<div class="row long_row">
+    <div>
+        <p id="output" class="display_row"></p>
+        <div class="buttons">
+            <div class="numeric">
+                <div class="row">
+                    <button id="1" class="btn short_btn">1</button>
+                    <button id="2" class="btn short_btn">2</button>
+                    <button id="3" class="btn short_btn">3</button>
+                    <button id="addition" class="btn long_btn">+</button>
+                </div>
+                <div class="row">
+                    <button id="4" class="btn short_btn">4</button>
+                    <button id="5" class="btn long_btn">5</button>
+                    <button id="6" class="btn short_btn">6</button>
+                    <button id="subtract" class="btn short_btn">-</button>
+                </div>
+                <div class="row">
+                    <button id="7" class="btn short_btn">7</button>
+                    <button id="8" class="btn short_btn">8</button>
+                    <button id="9" class="btn short_btn">9</button>
+                    <button id="multiply" class="btn long_btn">*</button>
+                </div>
+                <div class="row">
+                    <button id="parentheses_open" class="btn extra_short_btn">(</button>
+                    <button id="0" class="btn extra_short_btn">0</button>
+                    <button id="parentheses_close" class="btn extra_short_btn">)</button>
+                    <button id="backspace" class="btn extra_short_btn">&larr;</button>
+                    <button id="divide" class="btn extra_short_btn">/</button>
+                </div>
+            </div>
+            <div class="equals_btn">
+                <button id="equals_btn" class="equals_btn">=</button>
+            </div>
+        </div>
+    </div>
+    <div class="history_container">
+        <div class="history_header">
+            <p class="history_title">local history</p>
+        </div>
+        <div class="history_entity_container">
+
+        </div>
+    </div>
+</div>
+
+
+<script src="main.js"></script>
+</body>
+</html>
