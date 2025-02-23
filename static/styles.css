@@ -119,6 +119,7 @@ button.equals_btn:hover {
     height: 689px;
     background-color: rgba(217, 217, 217, 0.2);
     border-radius: 63px;
+    overflow: scroll;
 }
 
 .history_title {
@@ -138,6 +139,7 @@ button.equals_btn:hover {
     justify-content: center;
     align-items: center;
     text-align: center;
+    overflow: hidden;
 }
 
 .history_entity {

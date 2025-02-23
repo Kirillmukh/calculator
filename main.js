@@ -2,9 +2,10 @@ require(["jquery"], function ($) {
   const OPERANDS = new Set("+-*/");
   const output = $("#output");
 
+
   let result = [];
   let lastOperandIndex = 0;
-  const localHistoryRanges = [[585, 600], [630, 663]];
+  const LOCAL_HISTORY_RANGES = [[585, 600], [630, 663]];
   let localRange = 0;
 
   function reset(num) {
@@ -62,8 +63,6 @@ require(["jquery"], function ($) {
           }
           isLastDigit = true;
         }
-        console.log(digits);
-        console.log(operands);
       }
 
       while (operands.length > 0) {
@@ -74,6 +73,7 @@ require(["jquery"], function ($) {
         digits.push(operand_func.call(this, prev, curr));
       }
 
+      lastOperandIndex = 0;
       addToLocalHistory(source, +digits[0]);
       reset(+digits[0]);
     } catch (e) {
@@ -175,7 +175,7 @@ require(["jquery"], function ($) {
 
   function addToLocalHistory(source, answer) {
 
-    const width = randInt(...localHistoryRanges[localRange]);
+    const width = randInt(...LOCAL_HISTORY_RANGES[localRange]);
     localRange = +(!localRange);
     const button = $(`<button class="history_entity">${source.join("")} = ${answer}</button>`);
 
@@ -184,12 +184,12 @@ require(["jquery"], function ($) {
         "min-width": width,
         "max-width": width,
         width: `${width}px !important`,
-      })
+      });
 
     button.click(function () {
       result = source;
       showResults(result.join(""));
-    })
+    });
 
     $(".history_entity_container").append(button);
   }
